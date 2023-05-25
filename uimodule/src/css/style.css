@@ -1,0 +1,40 @@
+.Box {
+    background-color: darkgray;
+    border-style: solid;
+    border-color: black;
+}
+.companyIcon{
+    color: red;
+}
+.padInput{
+    padding-left: 10px;
+}
+.deleteEmployeeMove{
+    padding-left: 95px;
+}
+.fixcontentclass{
+    width: 100%;
+    height: 100%;
+    background-color: #FAFAFA
+    ;
+    border-right: 1px solid #BFBFBF
+    !important;
+}
+
+.cellBorderRight{
+    border-right: 1px solid lightgray;
+}
+
+.cellBorderLeft{
+    border-left: 1px solid lightgray;
+}
+
+.cellBorderBottom{
+    border-bottom: 1px solid green;
+}
+.cellBorderTop{
+    border: 5px solid red;
+}
+.liststyle{
+height: 2rem !important;
+}

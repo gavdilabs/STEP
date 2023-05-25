@@ -1,0 +1,88 @@
+<core:FragmentDefinition 
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:microchart ="sap.suite.ui.microchart"
+    xmlns:table="sap.ui.table"
+>
+    <Dialog
+        title="Add new project"
+        id="customerDelete"
+        contentWidth="25rem">
+        <f:SimpleForm
+            maxContainerCols="1"
+            layout="ResponsiveGridLayout"
+            labelSpanL="12"
+            labelSpanM="12"
+            emptySpanL="0"
+            emptySpanM="0"
+            columnsL="0"
+            columnsM="2">
+            <f:content>
+                <Label text="Choose the customer that you want to delete"  />
+                <!--             
+                <table:Table id="idCustomersTable"
+				rows="{DB>/Customer}"
+                getEnableBusyIndicator="true"
+				selectionMode="Single"
+				ariaLabelledBy="title"
+                width="30rem">
+                <table:plugins>
+					<plugins:SelectionPlugin
+						enableNotification="true"
+						selectionChange="onSelectionChange"/>
+				</table:plugins>
+                <table:extension>
+					<OverflowToolbar style="Clear">
+						<Title text="Customers"/>
+						<ToolbarSpacer/>
+						<SearchField liveChange=".onSearchSkill" width="50%" />
+					</OverflowToolbar>
+				</table:extension>
+				<table:columns>
+					<table:Column >
+						<Label text="Name" />
+						<table:template>
+							<Text text="{DB>customerName}" wrapping="false" />
+						</table:template>
+					</table:Column>
+				</table:columns>
+			</table:Table>
+            -->
+            
+                    <SearchField liveChange=".onSearchCustomer"/>
+            <Label text = ""/>
+            <List
+                id="customersListDelete"
+                items="{DB>/Customer}" 
+                mode="SingleSelectLeft"
+                width = "20rem"
+                growing="true"
+                growingThreshold="4"
+                growingScrollToLoad="false"
+                selectionChange="onSelectionChange">
+                <items>
+                <StandardListItem
+                    title="{DB>customerName}"
+                    icon="{DB>image}"
+                    iconDensityAware="false"
+                    iconInset="false"/>
+                </items>
+            </List>
+            </f:content>
+        </f:SimpleForm>
+        <!-- Buttons -->
+        <buttons>
+            <Button
+                id="deleteCustomerButton"
+                type="Emphasized"
+                enabled="false"
+                text="Delete"
+                press="onDeleteCustomer"/>
+            <Button
+                text="Cancel"
+                press="onCancelDeleteCustomerPress" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

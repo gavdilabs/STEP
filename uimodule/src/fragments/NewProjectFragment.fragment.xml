@@ -1,0 +1,162 @@
+<core:FragmentDefinition 
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:microchart ="sap.suite.ui.microchart"
+    xmlns:table="sap.ui.table"
+>
+    <Dialog
+        title="Add new project"
+        id="projectCreator">
+        <f:SimpleForm
+            maxContainerCols="1"
+            layout="ResponsiveGridLayout"
+            labelSpanL="12"
+            labelSpanM="12"
+            emptySpanL="0"
+            emptySpanM="0"
+            columnsL="1"
+            columnsM="1">
+            <f:content>
+                <!-- Unit -->
+                <Label
+                    text="Customer"
+                    required="true"/>
+                <ComboBox
+                    id="customerProject"
+                    items="{path: 'DB>/Customer'}"
+                    selectedKey="{appView>/customer}"
+                    change="checkFormValid"
+                    binding="{DB>/Customer(...)}"
+                    >
+                    <core:Item key="{DB>customerID}" text="{DB>customerName}"/>
+                                       <layoutData>
+                            <l:GridData span="L6 M6 S6"/>
+                        </layoutData>
+                </ComboBox>
+
+
+                <!-- Quantity -->
+                <Label text="Project Name"/>
+                
+                <Input
+                    id="nameProject"
+                    value="{
+                        path: 'appView>/projectName',
+                        type: 'sap.ui.model.type.Text',
+                        constraints: {
+                            minimum: 1,
+                            maximum: 100000000
+                        }
+                    }"
+                    required="true"
+                    placeholder="Name"
+                    change="checkFormValid"
+                    
+                    >
+                        <layoutData>
+                            <l:GridData span="L6 M6 S6"/>
+                        </layoutData>
+                    </Input>
+        
+                <!-- Creation Date -->
+                <Label
+                    text="Start day"
+                    required="true" />
+                <DatePicker
+                    id="startDateProject"
+                    value="{
+                        path: 'appView>/startDate',
+					    
+                        formatOptions: {
+                            style: 'long'
+                        }
+                    }"
+                    valueFormat="yyyy-MM-dd"
+                    displayFormat="yyyy-MM-dd"
+                    change="checkFormValid"/>
+                <Label
+                    text="End day"
+                    required="true" />
+                <DatePicker
+                id="endDateProject"
+                    value="{
+                        path: 'appView>/endDate',
+					    
+                        formatOptions: {
+                            style: 'long'
+                        }
+                    }"
+                    valueFormat="yyyy-MM-dd"
+                    displayFormat="yyyy-MM-dd"
+                    change="checkFormValid"/>
+                
+                <Label text= ""/>
+                <table:Table id="tableAllocations1"
+				rows="{DB>/Allocation}"
+				selectionMode="MultiToggle"
+				ariaLabelledBy="title"
+                width="60rem">
+				<table:extension>
+					<OverflowToolbar style="Clear">
+						<Title id="title" text="Allocations"/>
+						<ToolbarSpacer/>
+						<Button id="addAllocButton" icon="sap-icon://add" press="addAllocationPressed" enabled ="false" text="Add new"/>
+					</OverflowToolbar>
+				</table:extension>
+				<table:columns>
+					<table:Column >
+						<Label text="Name" />
+						<table:template>
+							<Text text="{DB>employee/employeeName} {DB>employee/employeeSurname}" wrapping="false" />
+						</table:template>
+					</table:Column>
+					<table:Column >
+						<Label text="Start date" />
+						<table:template>
+							<Label text="{DB>startDate}"/>
+						</table:template>
+					</table:Column>
+					<table:Column >
+						<Label text="End date" />
+						<table:template>
+							<Label text="{DB>endDate}" />
+						</table:template>
+					</table:Column>
+					<table:Column >
+						<Label text="Percentage allocation" />
+						<table:template>
+							<Label text="{DB>allocationPercentage}"/>
+						</table:template>
+					</table:Column>
+					<table:Column >
+						<Label text="Firm?" />
+						<table:template>
+							<Label text="{DB>firm}"/>
+						</table:template>
+					</table:Column>
+					<table:Column >
+						<Label text="On site?" />
+						<table:template>
+							<Label text="{DB>onsite}"/>
+						</table:template>
+					</table:Column>
+				</table:columns>
+			</table:Table>
+            </f:content>
+        </f:SimpleForm>
+        <!-- Buttons -->
+        <buttons>
+            <Button
+                id="onCreateButton"
+                type="Emphasized"
+                enabled="false"
+                text="Create"
+                press="onCreateProject"/>
+            <Button
+                text="Cancel"
+                press="onCancelProjectPress" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

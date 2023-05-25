@@ -1,0 +1,189 @@
+<core:FragmentDefinition 
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:microchart ="sap.suite.ui.microchart"
+    xmlns:table="sap.ui.table"
+    xmlns:plugins="sap.ui.table.plugins"
+>
+    <Dialog
+        title="Add new employee"
+        id="employeeCreator">
+        <f:SimpleForm
+            maxContainerCols="1"
+            layout="ResponsiveGridLayout"
+            labelSpanL="12"
+            labelSpanM="12"
+            emptySpanL="0"
+            emptySpanM="0"
+            columnsL="1"
+            columnsM="1">
+            <f:content>
+                <Label text="Employee Name"/>             
+                <Input
+                    id="nameEmployee"
+                    value="{
+                        path: 'appViewNewEmployee>/name',
+                        constraints: {
+                            minimum: 1,
+                            maximum: 100000000
+                        }
+                    }"
+                    valueState="None"
+                    valueStateText=""
+                    required="true"
+                    placeholder="Input employee's name"
+                    change="checkValid"
+                    >
+                    </Input>
+                <Label text="Employee Surname"/>             
+                <Input
+                    id="surnameEmployee"
+                    value="{
+                        path: 'appViewNewEmployee>/surname',
+                        constraints: {
+                            minimum: 1,
+                            maximum: 100000000
+                        }
+                    }"
+                    valueState="None"
+                    valueStateText=""
+                    required="true"
+                    placeholder="Input employee's surname"
+                    change="checkValid"
+                    >
+                    </Input>
+                <Label text="City"/>             
+                <Input
+                    id="cityEmployee"
+                    value="{
+                        path: 'appViewNewEmployee>/email',
+                        constraints: {
+                            minimum: 1,
+                            maximum: 100000000
+                        }
+                    }"
+                    liveChange="onCityChanged"
+                    required="true"
+                    placeholder="Input employee's city"
+                    change="checkValid"
+                    
+                    >
+                    </Input>
+
+                <Label text="Email"/>             
+                <Input
+                    id="emailEmployee"
+                    value="{
+                        path: 'appViewNewEmployee>/email',
+                        constraints: {
+                            minimum: 1,
+                            maximum: 100000000
+                        }
+                    }"
+                    liveChange="onEmailInputChange"
+                    required="true"
+                    placeholder="Input email address"
+                    change="checkValid"
+                    
+                    >
+
+                    </Input>
+                                        
+                     <Label text="Phone number"/>   
+                     <FlexBox alignItems="Center">  
+                     <Text text="+45  "/>      
+                     <Text text=" "/>   
+                    <Input
+                    id="phoneEmployee"
+                    class="padInput"
+                    value="{
+                        path: 'appViewNewEmployee>/phone'
+                    }"
+                    liveChange="onPhoneInputChange"
+                    required="true"
+                    placeholder="Input phone number"
+                    change="checkValid"
+			        maxLength= "8"
+                    >
+                    </Input>
+                    </FlexBox>                      
+                     <Label text="Avatar URL"/>            
+                    <Input
+                    id="imageEmployee"
+                    value="{
+                        path: 'appViewNewEmployee>/image',
+                        constraints: {
+                            minimum: 1,
+                            maximum: 100000000
+                        }
+                    }"
+                    required="true"
+                    placeholder="Paste the image URL here"
+                    change="checkValid"
+                    showValueHelp="true"
+                    valueHelpIconSrc="sap-icon://image-viewer"
+                    valueHelpRequest=".showUploadedImage"
+                    >
+
+                    </Input>
+                    <Label text=""/>
+                <table:Table id="idSkillTableEmployeeClass"
+				rows="{DB>/SkillName}"
+                getEnableBusyIndicator="true"
+				selectionMode="MultiToggle"
+				ariaLabelledBy="title"
+                width="30rem">
+                <table:plugins>
+					<plugins:MultiSelectionPlugin
+						enableNotification="true"
+						selectionChange="onSelectionChange"/>
+				</table:plugins>
+                <table:extension>
+					<OverflowToolbar style="Clear">
+						<Title text="Skills"/>
+						<ToolbarSpacer/>
+						<SearchField liveChange=".onSearchSkill" width="50%" />
+					</OverflowToolbar>
+				</table:extension>
+				<table:columns>
+					<table:Column >
+						<Label text="Skill Name" />
+						<table:template>
+							<Text text="{DB>skillName}" wrapping="false" />
+						</table:template>
+					</table:Column>
+					<table:Column >
+						<Label text="Minimum skill level" />
+						<table:template>
+                        <ComboBox
+                            
+                            items="{path: 'DB>/SkillLevel'}"
+                            binding="{DB>/SkillLevel(...)}"
+                            enabled="false"
+                            >
+                            <core:Item key="{DB>skillLevelID}" text="{DB>skillLevelName}"/>
+                        </ComboBox>
+						</table:template>
+					</table:Column>
+					
+				</table:columns>
+			</table:Table>
+            
+            </f:content>
+        </f:SimpleForm>
+        <!-- Buttons -->
+        <buttons>
+            <Button
+                id="createEmployeeButton"
+                type="Emphasized"
+                enabled="false"
+                text="Create"
+                press="onCreateEmployee"/>
+            <Button
+                text="Cancel"
+                press="onCancelEmployeePress" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

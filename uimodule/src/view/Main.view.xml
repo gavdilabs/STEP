@@ -1,0 +1,464 @@
+<mvc:View
+	controllerName="com.gavdilabs.finalchallenge.controller.Main"
+	displayBlock="true"
+	xmlns="sap.uxap"
+	xmlns:layout="sap.ui.layout"
+	xmlns:m="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.f"
+	xmlns:l="sap.ui.layout"
+	xmlns:org="com.gavdilabs.finalchallenge.controls"
+	xmlns:unified="sap.ui.unified"
+	xmlns:table="sap.ui.table"
+	
+    xmlns:plugins="sap.ui.table.plugins"
+    xmlns:dnd="sap.ui.core.dnd">
+	
+	<!--
+	<m:Page
+		title="GEO"
+		titleLevel="H6"
+		enableScrolling ="false">
+		<m:content enableScrolling ="false">
+
+		<org:CustomerList id="orgChart" width="100%" height="100%" canvasHeight="100%" canvasWidth="100%"  items="{DB>/Customer}">
+		<org:items>
+			<org:CustomerListItem name="{DB>customerName}" img="{DB>image}"/>
+		</org:items>
+		</org:CustomerList>
+		
+		<ObjectPageLayout id="ObjectPageLayout"
+		showTitleInHeaderContent="true"
+		showEditHeaderButton="true"
+		editHeaderButtonPress="handleEditBtnPress"
+		upperCaseAnchorBar="false">
+		<headerTitle>
+			<ObjectPageDynamicHeaderTitle>
+
+				<expandedHeading>
+					<m:HBox>
+						<m:Title text="Denise Smith" wrapping="true"/>
+						<m:ObjectMarker type="Favorite" class="sapUiTinyMarginBegin"/>
+					</m:HBox>
+				</expandedHeading>
+
+				<actions>
+					<m:OverflowToolbarButton icon="sap-icon://edit" text="edit header" type="Emphasized" tooltip="edit">
+						<m:layoutData>
+							<m:OverflowToolbarLayoutData priority="NeverOverflow"/>
+						</m:layoutData>
+					</m:OverflowToolbarButton>
+					<m:OverflowToolbarButton icon="sap-icon://pull-down" text="show section" type="Emphasized" tooltip="pull-down"/>
+					<m:OverflowToolbarButton icon="sap-icon://show" text="show state" tooltip="show"/>
+					<m:Button text="Toggle Footer" press="toggleFooter"/>
+				</actions>
+			</ObjectPageDynamicHeaderTitle>
+		</headerTitle>
+
+		<headerContent>
+			<m:FlexBox wrap="Wrap">
+				<m:Avatar class="sapUiSmallMarginEnd" src="./test-resources/sap/uxap/images/imageID_275314.png"  displaySize="L" />
+
+					<layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+						<m:Link text="+33 6 4512 5158"/>
+						<m:Link text="DeniseSmith@sap.com"/>
+					</layout:VerticalLayout>
+
+				<layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+					<m:Label text="Hello! I am Denise and I use UxAP"/>
+					<m:VBox>
+						<m:Label text="Achieved goals"/>
+						<m:ProgressIndicator percentValue="30" displayValue="30%"/>
+					</m:VBox>
+				</layout:VerticalLayout>
+
+				<layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+					<m:Label text="San Jose, USA"/>
+				</layout:VerticalLayout>
+			</m:FlexBox>
+		</headerContent>
+		<sections>
+		</sections>
+	</ObjectPageLayout>
+	
+		</m:content>
+		
+	</m:Page>
+	-->
+	<!--
+	<f:DynamicPage id="dynamicPageId" toggleHeaderOnTitleClick="false">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<m:Title text="Products"/>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+
+		<f:content>
+			<m:VBox fitContainer="true">
+				<m:OverflowToolbar class="sapFDynamicPageAlignContent">
+					<m:ToolbarSpacer/>
+					<m:SearchField width="17.5rem"/>
+					<m:MenuButton  icon="sap-icon://sort" useDefaultActionOnly="true" menuPosition="BeginBottom">
+					</m:MenuButton>
+				</m:OverflowToolbar>
+				<m:Table
+					id="productsTable"
+					inset="false"
+					items="{
+						path: 'DB>/Customer'
+						
+					}"
+					class="sapFDynamicPageAlignContent"
+					width="auto">
+					<m:columns>
+						<m:Column width="12em">
+							<m:Text text="Product"/>
+						</m:Column>
+						<m:Column	hAlign="End">
+							<m:Text text="Price"/>
+						</m:Column>
+					</m:columns>
+					<m:items>
+						<m:ColumnListItem type="Navigation" press=".onListItemPress">
+							<m:cells>
+								<m:ObjectIdentifier title="{DB>customerName}"/>
+							</m:cells>
+						</m:ColumnListItem>
+					</m:items>
+				</m:Table>
+			</m:VBox>
+		</f:content>
+
+		<f:footer>
+			<m:OverflowToolbar>
+				<m:ToolbarSpacer/>
+				<m:Button type="Accept" text="Accept"/>
+				<m:Button type="Reject" text="Reject"/>
+			</m:OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+	-->
+	
+		<m:Page
+		showHeader="false"
+		showNavButton="false">
+		<l:FixFlex  fixContentSize="85px" vertical="false">
+		<l:fixContent class="fixcontentclass">
+		<m:VBox class="fixcontentclass">
+				<org:navigationButtons width="50" icon = "sap-icon://company-view" label="Projects" />
+				<org:navigationButtons width="50" icon = "sap-icon://employee" label="Employees" press="goToEmployees"/>
+		</m:VBox>
+		</l:fixContent>
+		<l:flexContent>
+		<m:Page
+			id="sideContentContainer"
+			showHeader="false"
+			showNavButton="false">
+			<l:DynamicSideContent
+				id="DynamicSideContent"
+				sideContentFallDown="BelowM"
+				sideContentPosition="Begin"
+				containerQuery="true"
+				breakpointChanged="handleBreakpointChanged">
+				<ObjectPageLayout id="ObjectPageLayout"
+				showTitleInHeaderContent="true"
+				showEditHeaderButton="true"
+				editHeaderButtonPress="handleEditBtnPress"
+				upperCaseAnchorBar="false">
+				<headerTitle>
+				<ObjectPageDynamicHeaderTitle>
+
+					<expandedHeading>
+						<m:HBox>
+							<m:Title text="{DB>name}" wrapping="true"/>
+						</m:HBox>
+					</expandedHeading>
+
+					<actions>
+					</actions>
+				</ObjectPageDynamicHeaderTitle>
+		</headerTitle>
+
+		<headerContent>
+			<m:FlexBox wrap="Wrap">
+
+				<layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+				<m:Label text="Start Date"/>
+					<m:Text text="{DB>startDate}"/>
+				</layout:VerticalLayout>
+
+					<layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+					<m:Label text="End Date"/>
+						<m:Text text="{DB>endDate}"/>
+					</layout:VerticalLayout>				
+			</m:FlexBox>
+		</headerContent>
+		<sections>
+		<!--
+		<ObjectPageSection titleUppercase="false" title="Skills">
+				<subSections>
+					<ObjectPageSubSection titleUppercase="false">
+				<m:HBox renderType="Bare">
+				<table:Table
+					id="table1"
+					selectionMode="Single"
+					ariaLabelledBy="title"
+					rows="{
+						path: 'DB>/SkillName'
+					}"
+					visibleRowCount="10">
+					<table:extension>
+						<m:OverflowToolbar id="infobar" style="Clear">
+							<m:Title text="Available Products"/>
+						</m:OverflowToolbar>
+					</table:extension>
+					<table:columns>
+						<table:Column
+							sortProperty="Name"
+							filterProperty="Name">
+							<m:Text text="Skill Name" />
+							<table:template>
+								<m:Text text="{DB>skillName}" wrapping="false" />
+							</table:template>
+						</table:Column>
+					
+					</table:columns>
+					<table:dragDropConfig>
+						<dnd:DragInfo
+							groupName="moveToTable2"
+							sourceAggregation="rows"
+							dragStart="onDragStart" />
+						<dnd:DropInfo
+							groupName="moveToTable1"
+							drop="onDropTable1" />
+					</table:dragDropConfig>
+				</table:Table>
+				<m:VBox justifyContent="Center" class="sapUiTinyMarginBeginEnd">
+					<m:Button
+						class="sapUiTinyMarginBottom"
+						icon="sap-icon://navigation-right-arrow"
+						tooltip="Move to selected"
+						press="moveToTable2"/>
+					<m:Button
+						icon="sap-icon://navigation-left-arrow"
+						tooltip="Move to available"
+						press="moveToTable1"/>
+				</m:VBox>
+				<table:Table
+					id="table2"
+					selectionMode="Single"
+					ariaLabelledBy="title2"
+					rows="{
+						path: 'DB>/SkillName'
+					}"
+					visibleRowCount="10"
+					noData="Please drag-and-drop products here.">
+					<table:extension>
+						<m:OverflowToolbar style="Clear">
+							<m:Title text="Selected Products"/>
+							<m:ToolbarSpacer/>
+							<m:Button
+								icon="sap-icon://navigation-up-arrow"
+								tooltip="Move up"
+								press="moveUp"/>
+							<m:Button
+								icon="sap-icon://navigation-down-arrow"
+								tooltip="Move down"
+								press="moveDown"/>
+						</m:OverflowToolbar>
+					</table:extension>
+					<table:columns>
+                    	<table:Column>
+							<m:Text text="Skill Name" />
+							<table:template>
+								<m:Text text="{DB>skillName}" wrapping="false" />
+							</table:template>
+						</table:Column>
+					
+					</table:columns>
+					<table:dragDropConfig>
+						<dnd:DragInfo
+							groupName="moveToTable1"
+							sourceAggregation="rows"
+							dragStart="onDragStart" />
+						<dnd:DropInfo
+							groupName="moveToTable2"
+							targetAggregation="rows"
+							dropPosition="Between"
+							drop="onDropTable2" />
+						<dnd:DragDropInfo
+							sourceAggregation="rows"
+							targetAggregation="rows"
+							dropPosition="Between"
+							dragStart="onDragStart"
+							drop="onDropTable2" />
+					</table:dragDropConfig>
+				</table:Table>
+			</m:HBox>
+            	</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+			-->
+		<ObjectPageSection titleUppercase="false" title="Allocations &amp; Skills">
+				<subSections>
+					<ObjectPageSubSection titleUppercase="false">
+						<m:Table
+						id="skillallocTable"
+						headerText="Allocations &amp; Skills"
+						items="{
+						path:'DB>/AllocationSkill',
+						sorter: {
+							path: 'allocationID',
+							descending: false
+						}
+						}" >
+						<m:columns>
+						<m:Column mergeDuplicates="true">
+							<m:header>
+							<m:Text text="Name" />
+							</m:header>
+						</m:Column>
+						
+						<m:Column minScreenWidth="Tablet"
+							hAlign="Center" 
+							styleClass = "cellBorderLeft">
+							<m:header>
+							<m:Text text="Skill Name" />
+							</m:header>
+						</m:Column>
+						<m:Column
+							minScreenWidth="Tablet"
+							hAlign="Center" >
+							<m:header>
+							<m:Text text="Skill level" />
+							</m:header>
+						</m:Column>
+						</m:columns>
+						<m:ColumnListItem class="liststyle">
+						<m:Text text="{DB>allocation/allocationName}" />
+						<m:Text text="{DB>skill/skillName/skillName}"/>
+						<m:Text text="{DB>skill/skillLevel/skillLevelName}" />
+						</m:ColumnListItem>
+					</m:Table>
+						
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+
+			<ObjectPageSection titleUppercase="false" title="Planning Calendar">
+				<subSections>
+					<ObjectPageSubSection titleUppercase="false">
+						<m:PlanningCalendar
+							startDate="{path: 'DB>startDate'}"
+							rows="{path: 'DB>allocations', templateShareable:false}"
+							appointmentsVisualization="Filled"
+							appointmentSelect="handleAppointmentSelect"
+							showEmptyIntervalHeaders="false"
+							intervalSelect="handleAppointmentAddWithContext"
+							>
+						<m:toolbarContent>
+							<m:Title text="Title" titleStyle="H4"/>
+							<m:Button id="addButton" icon="sap-icon://add" press="handleAppointmentCreate" tooltip="Add"/>
+						</m:toolbarContent>
+						<m:rows>
+								<m:PlanningCalendarRow
+									icon="{DB>employee/image}"
+									title="{DB>employee/employeeName} {DB>employee/employeeSurname}"
+									text="Employee"
+									appointments="{path: 'DB>employee/allocations'}"
+									>
+								<m:appointments>
+									<unified:CalendarAppointment
+											startDate="{DB>startDate}"
+											endDate="{DB>endDate}"
+											title="{DB>allocationName}"
+											type="Type03"
+											tentative="false">
+									</unified:CalendarAppointment>
+								</m:appointments>
+
+							</m:PlanningCalendarRow>
+						</m:rows>
+						
+					</m:PlanningCalendar>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+			<!--
+		<m:VBox class="sapUiSmallMargin">
+
+		<m:PlanningCalendar
+				id="PC1"
+				startDate="{path: 'DB>startDate'}"
+				rows="{path: 'DB>/Customer'}"
+				appointmentsVisualization="Filled"
+				appointmentSelect="handleAppointmentSelect"
+				showEmptyIntervalHeaders="false"
+				intervalSelect="handleAppointmentAddWithContext">
+			<m:toolbarContent>
+				<m:Title text="Title" titleStyle="H4"/>
+				<m:Button id="addButton" icon="sap-icon://add" press="handleAppointmentCreate" tooltip="Add"/>
+			</m:toolbarContent>
+			<m:rows>
+					<m:PlanningCalendarRow
+						title="name"
+						text="text"
+						appointments="{path : 'appointments', templateShareable: false}"
+						>
+					<m:appointments>
+						<unified:CalendarAppointment
+								startDate="{DB>startDate}"
+								endDate="{DB>endDate}"
+								title="title"
+								type="Type02"
+								tentative="false">
+						</unified:CalendarAppointment>
+					</m:appointments>
+				</m:PlanningCalendarRow>
+			</m:rows>
+			
+		</m:PlanningCalendar>
+	</m:VBox>
+-->
+		</sections>
+		</ObjectPageLayout>
+
+		<l:sideContent>
+		<m:Page title= "Projects" showHeader="true" >
+			<m:subHeader>			
+			<m:Toolbar>
+				<m:SearchField liveChange=".onSearch" width="95%" />
+				<m:MenuButton  icon="sap-icon://add" useDefaultActionOnly="true" menuPosition="BeginBottom">
+					<m:menu>
+						<m:Menu itemSelected="onMenuAction">
+							<m:MenuItem text="New project" press=".onAddNewProject"/>
+							<m:MenuItem text="New customer" press=".onAddCustomerPressed"/>
+							<m:MenuItem text="Delete customer" press=".onDeleteCustomerPressed"/>
+						</m:Menu>
+					</m:menu>
+				</m:MenuButton>
+			</m:Toolbar>
+		</m:subHeader>
+					<org:CustomerList id="customerlist1" width="100%" height="100%" items="{DB>/Customer}">
+						<org:items>
+						<org:CustomerListItem id="customerItem1" name="{DB>customerName}" img="{DB>image}" customerID="{DB>customerID}" items="{DB>/Project}">
+							
+							<org:items>
+								<org:ProjectListItem id="projectItem" name="{DB>name}"  projectID="{DB>projectID}" projectcustomerID="{DB>customerID}" press=".onClickProjectItem"/>
+							</org:items>
+							</org:CustomerListItem>
+						</org:items>
+					</org:CustomerList>
+					</m:Page>
+				</l:sideContent>
+			
+			</l:DynamicSideContent>
+		</m:Page>
+				</l:flexContent>
+	</l:FixFlex>
+	</m:Page>
+	
+		
+</mvc:View>

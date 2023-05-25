@@ -1,0 +1,19 @@
+{
+    "welcomeFile": "/start/index.html",
+    "authenticationMethod": "none",
+    "routes": [
+        {
+            "source": "^/ui/(.*)$",
+            "target": "/finalchallenge-ui/$1",
+            "service": "html5-app-repo-rt",
+            "authenticationType": "none"
+        },
+        {
+            "source": "^/api/(.*)$",
+            "target": "$1",
+            "destination": "FinalChallenge",
+            "authenticationType": "none",
+            "csrfProtection": false
+        }
+    ]
+}

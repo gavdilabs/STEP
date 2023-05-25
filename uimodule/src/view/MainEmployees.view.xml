@@ -1,0 +1,196 @@
+<mvc:View
+	controllerName="com.gavdilabs.finalchallenge.controller.MainEmployees"
+	displayBlock="true"
+	xmlns="sap.uxap"
+	xmlns:layout="sap.ui.layout"
+	xmlns:m="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.f"
+	xmlns:l="sap.ui.layout"
+	xmlns:org="com.gavdilabs.finalchallenge.controls"
+	xmlns:unified="sap.ui.unified"
+    xmlns:table="sap.ui.table">
+	
+	
+		<m:Page
+		showHeader="false"
+		showNavButton="false">
+		<l:FixFlex  fixContentSize="85px" vertical="false">
+		<l:fixContent class="fixcontentclass">
+		<m:VBox class="fixcontentclass">
+				<org:navigationButtons width="50" icon = "sap-icon://company-view" label="Projects" press ="goToProjects"/>
+				<org:navigationButtons width="50" icon = "sap-icon://employee" label="Employees" press="goToEmployees"/>
+		</m:VBox>
+		</l:fixContent>
+		<l:flexContent>
+		<m:Page
+			id="sideContentContainer"
+			showHeader="false"
+			showNavButton="false">
+			<l:DynamicSideContent
+				id="DynamicSideContent2"
+				sideContentFallDown="BelowM"
+				sideContentPosition="Begin"
+				containerQuery="true"
+				breakpointChanged="handleBreakpointChanged">
+				<ObjectPageLayout id="ObjectPageLayout"
+				showTitleInHeaderContent="true"
+				showEditHeaderButton="true"
+				editHeaderButtonPress="handleEditBtnPress"
+				upperCaseAnchorBar="false">
+				<headerTitle>
+				<ObjectPageDynamicHeaderTitle>
+					<expandedHeading>
+						<m:HBox>
+							<m:Title text="{DB>employeeName} {DB>employeeSurname}" wrapping="true"/>
+						</m:HBox>
+					</expandedHeading>
+                    <snappedHeading>
+					<m:FlexBox  fitContainer="true" alignItems="Center">
+						<m:Avatar src="{DB>image}" class="sapUiTinyMarginEnd"/>
+						<m:Title text="{DB>employeeName} {DB>employeeSurname}" wrapping="true"/>
+					</m:FlexBox>
+			    	</snappedHeading>
+                
+					<actions>
+					</actions>
+				</ObjectPageDynamicHeaderTitle>
+		</headerTitle>
+
+		<headerContent>
+			<m:FlexBox wrap="Wrap">
+				<m:Avatar class="sapUiSmallMarginEnd" src="{DB>image}"  displaySize="L" />
+
+				<layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+				<m:Label text="City"/>
+					<m:Text text="{DB>city}"/>
+				</layout:VerticalLayout>
+
+					<layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+					<m:Label text="Phone"/>
+						<m:Text text="{DB>phone}"/>
+					</layout:VerticalLayout>			
+			</m:FlexBox>
+			<m:FlexBox wrap="Wrap" class ="deleteEmployeeMove">
+							<layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+					<m:Button text = "Edit employee info"/>
+
+							</layout:VerticalLayout>
+							<layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+					<m:Button text = "Delete employee" press="OnDeleteEmployee"/>			
+
+							</layout:VerticalLayout>
+			</m:FlexBox>
+		</headerContent>
+		<sections>
+        	<ObjectPageSection titleUppercase="false" title="Skills">
+				<subSections>
+					<ObjectPageSubSection titleUppercase="false">
+						<table:Table id="tableSkill"
+                        rows="{DB>skills}"
+                        selectionMode="MultiToggle"
+                        ariaLabelledBy="title"
+                        width="30rem"
+                         visibleRowCount='5'>
+                        <table:extension>
+                            <m:OverflowToolbar style="Clear">
+                                <m:Title id="title2" text="Skills"/>
+                                <m:ToolbarSpacer/>
+                                <m:Button text="Add skill" press= "addSkill"/>
+                            </m:OverflowToolbar>
+                        </table:extension>
+                        <table:columns>
+                            <table:Column >
+                                <m:Label text="Skill Name" />
+                                <table:template>
+                                    <m:Text text="{DB>skill/skillName/skillName}" wrapping="false" />
+                                </table:template>
+                            </table:Column>
+                            <table:Column >
+                                <m:Label text="Skill Level" />
+                                <table:template>
+                                    <m:Text text="{DB>skill/skillLevel/skillLevelName}" wrapping="false" />
+                                </table:template>
+                            </table:Column>
+                            
+                        </table:columns>
+                    </table:Table>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+
+			<ObjectPageSection titleUppercase="false" title="Planning Calendar">
+				<subSections>
+                
+					<ObjectPageSubSection titleUppercase="false" >
+					<m:PlanningCalendar
+                            id="PCemployee"
+							rows="{path: 'DB>/Employee', templateShareable:false}"
+							appointmentsVisualization="Filled"
+							appointmentSelect="handleEmployeeAllocSelect"
+							showEmptyIntervalHeaders="false"
+							intervalSelect="handleAppointmentAddWithContext"
+							>
+						<m:toolbarContent>
+							<m:Title text="Title" titleStyle="H4"/>
+							<m:Button id="addButton" icon="sap-icon://add" press="handleAppointmentCreate" tooltip="Add"/>
+						</m:toolbarContent>
+						<m:rows>
+								<m:PlanningCalendarRow
+									icon="{DB>image}"
+									title="{DB>employeeName} {DB>employeeSurname}"
+									text="Employee"
+									appointments="{path: 'DB>allocations'}"
+									>
+								<m:appointments>
+									<unified:CalendarAppointment
+											startDate="{DB>startDate}"
+											endDate="{DB>endDate}"
+											title="{DB>allocationName}"
+											type="Type03"
+											tentative="false">
+									</unified:CalendarAppointment>
+								</m:appointments>
+
+							</m:PlanningCalendarRow>
+						</m:rows>
+						
+					</m:PlanningCalendar>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+			
+		</sections>
+		</ObjectPageLayout>
+
+		<l:sideContent>
+		<m:Page title= "Employees" showHeader="true" >
+                        <m:subHeader>			
+                        <m:Toolbar>
+                            <m:SearchField liveChange=".onSearchEmployee" width="95%" />
+                            <m:MenuButton  icon="sap-icon://add" useDefaultActionOnly="true" menuPosition="BeginBottom">
+                                <m:menu>
+                                    <m:Menu itemSelected="onMenuAction">
+                                        <m:MenuItem text="New employee" press="onAddNewEmployeePressed"/>
+                                    </m:Menu>
+                                </m:menu>
+                            </m:MenuButton>
+                        </m:Toolbar>
+                    </m:subHeader>
+					<org:EmployeeList id="employeelist" width="100%" height="100%" items="{DB>/Employee}">
+						<org:items>
+						<org:EmployeeListItem id="employeeItem" name="{DB>employeeName} {DB>employeeSurname}" img="{DB>image}" employeeID="{DB>employeeID}" press="onClickEmployee">
+							</org:EmployeeListItem>
+						</org:items>
+					</org:EmployeeList>
+					</m:Page>
+				</l:sideContent>
+			
+			</l:DynamicSideContent>
+		</m:Page>
+				</l:flexContent>
+	</l:FixFlex>
+	</m:Page>
+	
+		
+</mvc:View>
