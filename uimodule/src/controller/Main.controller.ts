@@ -1,11 +1,8 @@
 import MessageBox from "sap/m/MessageBox";
 import ProjectListItem from "../controls/ProjectListItem";
-import CustomerListItem from "../controls/CustomerListItem";
 import BaseController from "./BaseController";
 import Filter from "sap/ui/model/Filter";
 import FilterOperator from "sap/ui/model/FilterOperator";
-import FilterType from "sap/ui/model/FilterType";
-import PlanningCalendarRow from "sap/m/PlanningCalendarRow";
 import Fragment from "sap/ui/core/Fragment";
 import JSONModel from "sap/ui/model/json/JSONModel";
 import Button from "sap/m/Button";
@@ -81,7 +78,7 @@ export default class Main extends BaseController {
 
         });
 
-        const aData = jQuery.ajax({
+        jQuery.ajax({
             type: "GET",
             url: "/odata/Allocation?$select=allocationID&$filter=projectID%20eq%20%27" + bindelemtn + "%27",
             async: false,
