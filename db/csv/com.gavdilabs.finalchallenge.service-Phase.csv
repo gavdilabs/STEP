@@ -1,0 +1,4 @@
+phaseID;projectID;phaseName;startDate;endDate
+3a4c753b-4057-4441-aa5b-2afe35380a8e;49f7cb24-efa2-437e-992a-11e98bfbbc0c;Plan and design;2022-06-07;2022-06-13 
+56a7a587-efe4-4311-a126-c977f653db77;49f7cb24-efa2-437e-992a-11e98bfbbc0c;Development;2022-06-13;2022-06-30
+6b626270-ff3d-44a0-b78e-660d5795d614;49f7cb24-efa2-437e-992a-11e98bfbbc0c;Testing;2022-06-30;2022-07-10

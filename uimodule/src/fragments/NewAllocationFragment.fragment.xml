@@ -1,0 +1,377 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:microchart ="sap.suite.ui.microchart"
+    xmlns:table="sap.ui.table"
+    xmlns:plugins="sap.ui.table.plugins"
+>
+    <Dialog
+        title="Add new allocation"
+        id="allocationCreator">
+    
+	<l:VerticalLayout  width="100%">
+		<FlexBox class="columns">
+        <f:SimpleForm
+            maxContainerCols="1"
+            layout="ResponsiveGridLayout"
+            labelSpanL="12"
+            labelSpanM="12"
+            emptySpanL="0"
+            emptySpanM="0"
+            columnsL="1"
+            columnsM="1">
+            <f:content>     
+            <Label text="Allocation Name"/> 
+                 <Input
+                    id="allocName"
+                    value="{
+                        path: 'appViewAllocation>name'
+                    }"
+                    type="Text"
+                    placeholder="e.g. Testing the prototype"
+                    class="sapUiSmallMarginBottom"
+                    width="25rem"
+                    required="true"
+                    change="checkValid"
+                    >
+                    </Input>  
+                <Label text="Allocation Percentage">
+              <layoutData>
+					<FlexItemData
+						growFactor="3"
+						baseSize="0"
+						backgroundDesign="Solid"
+						styleClass="sapUiTinyMargin" />
+				</layoutData>
+                </Label>
+                        
+                <Input
+                    id="percentageInput"
+                    value="{
+                        path: 'appViewAllocation>/percentage',
+                        type: 'sap.ui.model.type.Number',
+                        constraints: {
+                            minimum: 1,
+                            maximum: 2
+                        }
+                    }"
+                    type="Number"
+                    placeholder="Enter a number"
+                    class="sapUiSmallMarginBottom"
+                    width="25rem"
+                    liveChange="onInputChange"
+                    required="true" 
+                    change="checkValid"
+                    >
+                        <layoutData>
+                                <FlexItemData
+                                    growFactor="3"
+                                    baseSize="0"
+                                    backgroundDesign="Solid"
+                                    styleClass="sapUiTinyMargin" />
+                            </layoutData>
+                    </Input>
+        
+                 <Label
+                    text="Start day"
+                    required="true" />
+                <DatePicker
+                    id="startDateAlloc"
+                    value="{
+                        path: 'appViewAllocation>/startDate',
+					    
+                        formatOptions: {
+                            style: 'long'
+                        }
+                    }"
+                    valueFormat="yyyy-MM-dd"
+                    displayFormat="yyyy-MM-dd"
+                    width="25rem"
+                    change="checkValid"/>
+                <Label
+                    text="End day"
+                    required="true" />
+                <DatePicker
+                    id="endDateAlloc"
+                    value="{
+                        path: 'appViewAllocation>/endDate',
+					    
+                        formatOptions: {
+                            style: 'long'
+                        }
+                    }"
+                    valueFormat="yyyy-MM-dd"
+                    displayFormat="yyyy-MM-dd"
+                    width="25rem"
+                    change="checkValid"/>
+                 
+
+                <Label
+                    text="Onsite?"/>
+			    <Switch id="onsiteSwitch" state="true" customTextOn="Yes" customTextOff="No" change="checkValid">
+			    </Switch>
+
+                <Label
+                    text="Firm?"/>
+                
+			    <Switch id="firmSwitch" state="true" customTextOn="Yes" customTextOff="No" change="checkValid">
+			    </Switch>
+                
+                
+                <Label text=""/>
+                <!--
+                	<Table id="idSkillTable"
+                    inset="false"
+                    mode="MultiSelect"
+                    items="{
+                        path: 'DB>/SkillName'
+                
+                    }"
+                    width ="30rem">
+                    <headerToolbar>
+                        <OverflowToolbar>
+                            <Button text ="Send" press="findEmployees_matchSkills"/>
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column width="12em">
+                            <Text text="Name" />
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Text text="Level" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem vAlign="Middle">
+                            <cells>
+                                <Text
+                                    text="{DB>skillName}" />
+                                <ComboBox
+                                    id="ComboBoxList2"
+                                    items="{path: 'DB>/SkillLevel'}"
+                                    binding="{DB>/SkillLevel(...)}"
+                                    >
+                                    <core:Item key="{DB>skillLevelID}" text="{DB>skillLevelName}"/>
+                                </ComboBox>
+                            
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+                -->
+                
+                <table:Table id="idSkillTable"
+				rows="{DB>/SkillName}"
+                getEnableBusyIndicator="true"
+				selectionMode="MultiToggle"
+				ariaLabelledBy="title"
+                visibleRowCount = "16"
+                width="30rem"
+                navigationMode= "none">
+                <table:plugins>
+					<plugins:MultiSelectionPlugin
+						enableNotification="true"
+						selectionChange="onSelectionChange"/>
+				</table:plugins>
+                <table:extension>
+					<OverflowToolbar style="Clear">
+						<Title id="title2" text="Skills"/>
+						<ToolbarSpacer/>
+						<SearchField liveChange=".onSearchSkill" width="50%" />
+					</OverflowToolbar>
+				</table:extension>
+				<table:columns>
+					<table:Column >
+						<Label text="Skill Name" />
+						<table:template>
+							<Text text="{DB>skillName}" wrapping="false" />
+						</table:template>
+					</table:Column>
+					<table:Column >
+						<Label text="Minimum skill level" />
+						<table:template>
+                        <ComboBox
+                            id="ComboBoxList2"
+                            items="{path: 'DB>/SkillLevel'}"
+                            binding="{DB>/SkillLevel(...)}"
+                            enabled="false"
+                            >
+                            <core:Item key="{DB>skillLevelID}" text="{DB>skillLevelName}"/>
+                        </ComboBox>
+						</table:template>
+					</table:Column>
+					
+				</table:columns>
+			</table:Table>
+            
+            </f:content>
+            
+        </f:SimpleForm>
+        <!--
+          <List headerText="Matched Employees"
+                items="{DB>/Employee}" 
+                mode="SingleSelectLeft"
+                width = "20rem"
+                growing="true"
+                growingThreshold="4"
+                growingScrollToLoad="false">
+            <items>
+                <CustomListItem  title="{DB>employeeName} {DB>employeeSurname}" icon="{DB>image}">
+                        <content>
+                            <List 
+                                items="{DB>skills}" 
+                                width = "10rem">
+                                <items>
+                                    <StandardListItem title="{DB>skill/skillName/skillName}" info ="{DB>skill/skillLevel/skillLevelName}"></StandardListItem>
+                                </items>
+                            </List>
+                        </content> 
+                </CustomListItem>
+            </items> 
+            </List>
+            -->
+            
+            <List
+                id="matchedEmployees"
+                headerText="Matched Employees"
+                items="{DB>/Employee}" 
+                mode="SingleSelectLeft"
+                width = "20rem"
+                growing="true"
+                growingThreshold="4"
+                growingScrollToLoad="false"
+                selectionChange="onSeletionChangeEmployee">
+                <items>
+                <StandardListItem
+                    title="{DB>employeeName} {DB>employeeSurname}"
+                    description="{DB>city}"
+                    icon="{DB>image}"
+                    iconDensityAware="false"
+                    iconInset="false" 
+                    blocked="true"/>
+                </items>
+            </List>
+            
+		</FlexBox>
+	</l:VerticalLayout>
+    <!--
+        <f:SimpleForm
+            maxContainerCols="1"
+            layout="ResponsiveGridLayout"
+            labelSpanL="12"
+            labelSpanM="12"
+            emptySpanL="0"
+            emptySpanM="0"
+            columnsL="1"
+            columnsM="1">
+            <f:content>        
+                <Label text="Allocation Percentage"/>
+                        
+                <Input
+                    id="percentageInput"
+                    value="{
+                        path: 'appViewAllocation>percentage',
+                        type: 'sap.ui.model.type.Text',
+                        constraints: {
+                            minimum: 1,
+                            maximum: 100000000
+                        }
+                    }"
+                    type="Number"
+                    placeholder="Enter a number"
+                    class="sapUiSmallMarginBottom">
+                        <layoutData>
+                            <l:GridData span="XL6 L6 M6 S6" />
+                        </layoutData>
+                    </Input>
+        
+                <Label
+                    text="Start day"
+                    required="true" />
+                <DatePicker
+                    id="startDateAlloc"
+                    value="{
+                        path: 'appViewAllocation>startDate',
+					    
+                        formatOptions: {
+                            style: 'long'
+                        }
+                    }"
+                    valueFormat="yyyy-MM-dd"
+                    displayFormat="yyyy-MM-dd"/>
+                <Label
+                    text="End day"
+                    required="true" />
+                <DatePicker
+                    id="endDateAlloc"
+                    value="{
+                        path: 'appViewAllocation>endDate',
+					    
+                        formatOptions: {
+                            style: 'long'
+                        }
+                    }"
+                    valueFormat="yyyy-MM-dd"
+                    displayFormat="yyyy-MM-dd"/>
+
+                <Label text="Skills"/>
+
+                <table:Table id="tableSkill"
+				rows="{DB>/SkillName}"
+				selectionMode="MultiToggle"
+				ariaLabelledBy="title"
+                width="20rem">
+                <table:extension>
+					<OverflowToolbar style="Clear">
+						<Title id="title2" text="Allocations"/>
+						<ToolbarSpacer/>
+						<SearchField liveChange=".onSearchSkill" width="50%" />
+					</OverflowToolbar>
+				</table:extension>
+				<table:columns>
+					<table:Column >
+						<Label text="Skill Name" />
+						<table:template>
+							<Text text="{DB>skillName}" wrapping="false" />
+						</table:template>
+					</table:Column>
+					<table:Column >
+						<Label text="Skill level" />
+						<table:template>
+                        <ComboBox
+                            id="ComboBoxList2"
+                            items="{path: 'DB>/SkillLevel'}"
+                            binding="{DB>/SkillLevel(...)}"
+                            >
+                            <core:Item key="{DB>skillLevelID}" text="{DB>skillLevelName}"/>
+                        </ComboBox>
+						</table:template>
+					</table:Column>
+					
+				</table:columns>
+			</table:Table>
+            </f:content>
+        </f:SimpleForm>
+        -->
+        <!-- Buttons -->
+        <buttons>
+            <Button
+                id="findemployeeButton"
+                type="Emphasized"
+                enabled="false"
+                text="Find Employee"
+                press="findEmployees_matchSkills_tabletable"/>
+            <Button
+                id="addAlloc"
+                type="Emphasized"
+                enabled="false"
+                text="Create Allocation"
+                press="onCreateAllocation"/>
+            <Button
+                text="Cancel"
+                press="onCancelAllocation" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

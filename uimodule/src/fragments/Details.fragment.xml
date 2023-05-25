@@ -1,0 +1,37 @@
+<core:FragmentDefinition
+		xmlns="sap.m"
+		xmlns:f="sap.ui.layout.form"
+		xmlns:core="sap.ui.core">
+	<ResponsivePopover
+			id="detailsPopover"
+			title="Allocation"
+			class="sapUiContentPadding"
+			placement="Auto">
+		<beginButton>
+			<Button text="Edit" type="Emphasized" press="handleEditButton"/>
+		</beginButton>
+		<endButton>
+			<Button text="Delete" press="handleDeleteAppointment"/>
+		</endButton>
+		<f:SimpleForm
+				editable="false"
+				layout="ResponsiveGridLayout"
+				singleContainerFullSize="false">
+			<Label text="Name" labelFor="nameText"/>
+			<Text id="nameText" text="{path: 'DB>allocationName'}"/>
+			<Label text="Percentage" labelFor="percentageText"/>
+			<Text id="percentageText" text="{path: 'DB>allocationPercentage'}"/>
+			<Label text="Person assigned" labelFor="personText"/>
+			<Text id="personText" text="{path: 'DB>employee/employeeName'}"/>
+			<Label text="From" labelFor="startDateText"/>
+			<Text id="startDateText" text="{path: 'DB>startDate'}"/>
+			<Label text="To" labelFor="endDateText"/>
+			<Text id="endDateText" text="{path: 'DB>endDate'}"/>
+			<Label text="On site?" labelFor="onsiteText"/>
+			<Text id="onsiteText" text="{path: 'DB>onsite'}"/>
+			<Label text="Firm?" labelFor="firmText"/>
+			<Text id="firmText" text="{path: 'DB>firm'}"/>
+			
+		</f:SimpleForm>
+	</ResponsivePopover>
+</core:FragmentDefinition>

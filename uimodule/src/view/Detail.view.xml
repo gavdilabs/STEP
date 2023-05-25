@@ -1,0 +1,71 @@
+<mvc:View
+	controllerName="com.gavdilabs.finalchallenge.controller.Detail"
+	xmlns="sap.uxap"
+	xmlns:my="com.gavdilabs.finalchallenge.controller.Tooltip"
+	xmlns:commons="sap.suite.ui.commons"
+	xmlns:microchart ="sap.suite.ui.microchart"
+	xmlns:l="sap.ui.layout"
+	xmlns:m="sap.m"
+	xmlns:f="sap.f"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:viz="sap.viz.ui5.controls"
+	>
+	
+	<ObjectPageLayout
+		id="ObjectPageLayout"
+		showTitleInHeaderContent="true"
+		alwaysShowContentHeader="false"
+		preserveHeaderStateOnScroll="false"
+		headerContentPinnable="true"
+		isChildPage="true"
+		upperCaseAnchorBar="false">
+		<headerTitle>
+			<ObjectPageDynamicHeaderTitle>
+				<heading>
+					<m:Title text="{DB>customerName}" wrapping="true" />
+				</heading>
+
+				<navigationActions>
+					<m:OverflowToolbarButton
+						type="Transparent"
+						icon="sap-icon://full-screen"
+						press=".handleFullScreen"
+						tooltip="Enter Full Screen Mode"
+						visible="{= ${/actionButtonsInfo/midColumn/fullScreen} !== null }"/>
+					<m:OverflowToolbarButton
+						type="Transparent"
+						icon="sap-icon://exit-full-screen"
+						press=".handleExitFullScreen"
+						tooltip="Exit Full Screen Mode"
+						visible="{= ${/actionButtonsInfo/midColumn/exitFullScreen} !== null }"/>
+					<m:OverflowToolbarButton
+						type="Transparent"
+						icon="sap-icon://decline"
+						press=".handleClose"
+						tooltip="Close column"
+						visible="{= ${/actionButtonsInfo/midColumn/closeColumn} !== null }"/>
+				</navigationActions>
+			</ObjectPageDynamicHeaderTitle>
+		</headerTitle>
+		<headerContent>
+		<l:VerticalLayout class="sapUiDemoFlexBoxSizeAdjustments" width="100%">
+				<m:FlexBox class="columns">
+					<f:Avatar
+					src="{DB>image}"
+					displaySize="L"
+					displayShape="Square"
+					class="sapUiTinyMarginEnd">
+					</f:Avatar>
+					<m:VBox>
+						<m:ObjectIdentifier title="Product ID" text = "{DB>customerID}"/>
+					</m:VBox>
+				</m:FlexBox>
+			</l:VerticalLayout>
+		</headerContent>
+
+		
+	</ObjectPageLayout>
+	
+</mvc:View>

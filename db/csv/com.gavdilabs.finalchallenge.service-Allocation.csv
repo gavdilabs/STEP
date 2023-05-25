@@ -1,0 +1,6 @@
+allocationID;projectID;phaseID;employeeID;allocationName;allocationPercentage;startDate;endDate;firm;onsite
+35c5ce1d-6687-47b4-b87a-5dcb5d2a403f;49f7cb24-efa2-437e-992a-11e98bfbbc0c;3a4c753b-4057-4441-aa5b-2afe35380a8e;6208d622-1ee4-4228-b817-6ea3b8c42a40;Design thinking;20;2022-06-06;2022-06-09;false;true
+35c5ce1d-6687-47b4-9d45-63c23528a548;49f7cb24-efa2-437e-992a-11e98bfbbc0c;3a4c753b-4057-4441-aa5b-2afe35380a8e;5a1ab311-9652-42f7-b473-58a8724b2800;UX prototyping;100;2022-06-08;2022-06-12;false;true
+ecc0b817-135d-411f-9a11-bceffbc27202;49f7cb24-efa2-437e-992a-11e98bfbbc0c;56a7a587-efe4-4311-a126-c977f653db77;f1d3ee28-ce53-42e2-a79d-6941c146db7b;FrontEnd;40;2022-06-12;2022-07-03;false;true
+ff1718f0-dbbc-4a7b-bac9-839e8fd570fd;49f7cb24-efa2-437e-992a-11e98bfbbc0c;56a7a587-efe4-4311-a126-c977f653db77;7808c6e1-62da-4a48-83c0-8989a18050c5;BackEnd;60;2022-06-20;2022-07-03;false;true
+6c9e0b50-2dd0-4666-b153-c8ac07cdce21;49f7cb24-efa2-437e-992a-11e98bfbbc0c;6b626270-ff3d-44a0-b78e-660d5795d614;474090c4-63c4-4238-a92f-d4627e8631bc;Test & Deployment;100;2022-07-03;2022-07-10;false;true

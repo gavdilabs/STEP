@@ -1,0 +1,111 @@
+<core:FragmentDefinition 
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:microchart ="sap.suite.ui.microchart"
+    xmlns:table="sap.ui.table"
+>
+    <Dialog
+        title="Add new project"
+        id="customerCreator">
+        <f:SimpleForm
+            maxContainerCols="1"
+            layout="ResponsiveGridLayout"
+            labelSpanL="12"
+            labelSpanM="12"
+            emptySpanL="0"
+            emptySpanM="0"
+            columnsL="1"
+            columnsM="1">
+            <f:content>
+                <Label text="Customer Name"/>             
+                <Input
+                    id="nameCustomer"
+                    value="{
+                        path: 'appViewNewCustomer>/name',
+                        constraints: {
+                            minimum: 1,
+                            maximum: 100000000
+                        }
+                    }"
+                    valueState="None"
+                    valueStateText=""
+                    required="true"
+                    placeholder="Input costumer's name"
+                    change="checkValid"
+                    >
+                    </Input>
+                <Label text="Email"/>             
+                <Input
+                    id="emailCustomer"
+                    value="{
+                        path: 'appViewNewCustomer>/email',
+                        constraints: {
+                            minimum: 1,
+                            maximum: 100000000
+                        }
+                    }"
+                    liveChange="onEmailInputChange"
+                    required="true"
+                    placeholder="Input email address"
+                    change="checkValid"
+                    
+                    >
+
+                    </Input>
+                                        
+                     <Label text="Phone number"/>   
+                     <FlexBox alignItems="Center">  
+                     <Text text="+45  "/>      
+                     <Text text=" "/>   
+                    <Input
+                    id="phoneCustomer"
+                    class="padInput"
+                    value="{
+                        path: 'appViewNewCustomer>/phone'
+                    }"
+                    liveChange="onPhoneInputChange"
+                    required="true"
+                    placeholder="Input phone number"
+                    change="checkValid"
+			        maxLength= "8"
+                    >
+                    </Input>
+                    </FlexBox>                      
+                     <Label text="Avatar URL"/>            
+                    <Input
+                    id="imageCustomer"
+                    value="{
+                        path: 'appViewNewCustomer>/image',
+                        constraints: {
+                            minimum: 1,
+                            maximum: 100000000
+                        }
+                    }"
+                    required="true"
+                    placeholder="Paste the image URL here"
+                    change="checkValid"
+                    showValueHelp="true"
+                    valueHelpIconSrc="sap-icon://image-viewer"
+                    valueHelpRequest=".showUploadedImage"
+                    >
+
+                    </Input>
+                
+            </f:content>
+        </f:SimpleForm>
+        <!-- Buttons -->
+        <buttons>
+            <Button
+                id="createCustomerButton"
+                type="Emphasized"
+                enabled="false"
+                text="Create"
+                press="onCreateCustomer"/>
+            <Button
+                text="Cancel"
+                press="onCancelCustomerPress" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>
