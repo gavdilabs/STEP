@@ -35,7 +35,7 @@ export default class Main extends BaseController {
     }
 
     onInit(): void {
-        var oViewModel = new JSONModel({
+        const oViewModel = new JSONModel({
             customer: "",
             projectName: "",
             startDate: "",
@@ -44,6 +44,9 @@ export default class Main extends BaseController {
         });
         this.getView().setModel(oViewModel, "appView");
 
+    }
+
+    onAfterRendering(): void {
         this.getView().bindElement({
             path: "/Project(49f7cb24-efa2-437e-992a-11e98bfbbc0c)",
             model: "DB"
@@ -92,7 +95,7 @@ export default class Main extends BaseController {
                     const filter1 = new Filter("allocationID", FilterOperator.EQ, "1");
                     aFilters_allocations.push(filter1);
                 }
-                oTable.getBinding("items").filter(aFilters_allocations, "Application");
+                oTable?.getBinding("items")?.filter(aFilters_allocations, "Application");
             }
         });
     }
